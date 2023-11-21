@@ -1,6 +1,5 @@
 package com.cloud.rebellion.demo;
 
-import com.cloud.rebellion.demo.entity.Hookah;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
