@@ -1,11 +1,10 @@
-package com.cloud.rebellion.demo.entity;
+package com.cloud.rebellion.demo.model.entity;
 
 import com.cloud.rebellion.demo.enums.Color;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.lang.annotation.Inherited;
 import java.sql.Blob;
 
 @Getter
@@ -40,6 +39,6 @@ public class BaseEntity {
     @Column(nullable = false)
     private double price;
 
-    @Column(name = "image_binary", nullable = false)
+    @Column(name = "image_binary",nullable = false)
     private Blob image_binary;
 }

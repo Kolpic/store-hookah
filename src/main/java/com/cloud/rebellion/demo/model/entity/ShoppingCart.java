@@ -1,5 +1,6 @@
-package com.cloud.rebellion.demo.entity;
+package com.cloud.rebellion.demo.model.entity;
 
+import com.cloud.rebellion.demo.model.entity.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,5 +1,6 @@
-package com.cloud.rebellion.demo.entity;
+package com.cloud.rebellion.demo.model.entity;
 
+import com.cloud.rebellion.demo.model.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

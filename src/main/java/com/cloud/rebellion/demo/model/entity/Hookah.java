@@ -1,23 +1,22 @@
-package com.cloud.rebellion.demo.entity;
+package com.cloud.rebellion.demo.model.entity;
 
+import com.cloud.rebellion.demo.model.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @Entity
 @Table
-public class Tobacco extends BaseEntity {
+public class Hookah extends BaseEntity {
 
     @Column(nullable = false)
-    private int quantity;
+    private int height;
 
     @Column(nullable = false)
-    private String flavour;
-
-    @Column(nullable = false)
-    private String type;
+    private String information;
 }
