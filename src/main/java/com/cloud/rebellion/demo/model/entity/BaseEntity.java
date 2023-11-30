@@ -39,6 +39,6 @@ public class BaseEntity {
     @Column(nullable = false)
     private double price;
 
-    @Column(name = "image_binary",nullable = false)
+    @Column(name = "image_binary")
     private Blob image_binary;
 }
