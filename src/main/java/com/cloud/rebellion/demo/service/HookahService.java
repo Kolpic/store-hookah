@@ -75,7 +75,7 @@ public class HookahService {
                     Object convertedValue = convertValue(field.getType(), value);
                     ReflectionUtils.setField(field, existingHookah.get(), convertedValue);
                 } else {
-                    throw new EmptyPatchMapFieldsException("One of the field/fields is empty");
+                    throw new EmptyPatchMapFieldsException("One of the field/fields is empty or with wrong data type");
                 }
             });
             hookahRepository.save(existingHookah.get());
