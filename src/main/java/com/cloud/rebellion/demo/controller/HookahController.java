@@ -43,13 +43,13 @@ public class HookahController {
     }
 
     @DeleteMapping("/delete-by-id/{id}")
-    public ResponseEntity<Void> deletePostByUd(@PathVariable int id) {
+    public ResponseEntity<Void> deleteHookahById(@PathVariable int id) {
         hookahService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/delete-by-name/{name}")
-    public ResponseEntity<Void> deletePostByUd(@PathVariable String name) {
+    public ResponseEntity<Void> deleteHookahByName(@PathVariable String name) {
         hookahService.deleteByName(name);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
