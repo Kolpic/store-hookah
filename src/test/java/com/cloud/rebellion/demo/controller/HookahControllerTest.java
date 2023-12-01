@@ -50,15 +50,6 @@ class HookahControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     public void testGetAllHookahsShouldReturnAllHookahsSuccessful() throws Exception {
         // Arrange
@@ -66,10 +57,12 @@ class HookahControllerTest {
         HookahDTO mockSecondHookah = new HookahDTO();
 
         List<HookahDTO> hookahDTOList = List.of(mockFirstHookah, mockSecondHookah);
-        when(hookahService.getAllHookahs()).thenReturn(hookahDTOList);
+        when(hookahService.getAllHookahs())
+                .thenReturn(hookahDTOList);
 
         // Act
-        ResultActions resultActions = mockMvc.perform(get("/hookahs"));
+        ResultActions resultActions = mockMvc
+                .perform(get("/hookahs"));
 
         // Assert
         resultActions.andExpect(status().isOk())
@@ -87,10 +80,12 @@ class HookahControllerTest {
         mockFirstHookah.setWeight(80);
         mockFirstHookah.setBrand("Makloud");
 
-        when(hookahService.getHookahById(hookahIdWeWantToGet)).thenReturn(mockFirstHookah);
+        when(hookahService.getHookahById(hookahIdWeWantToGet))
+                .thenReturn(mockFirstHookah);
 
         // Act
-        ResultActions resultActions = mockMvc.perform(get("/hookahs/find-by-id/{id}", hookahIdWeWantToGet));
+        ResultActions resultActions = mockMvc
+                .perform(get("/hookahs/find-by-id/{id}", hookahIdWeWantToGet));
 
         // Assert
         resultActions.andExpect(status().isOk())
@@ -109,7 +104,8 @@ class HookahControllerTest {
                 .thenThrow(new NoSuchHookahException("There is no such hookah"));
 
         // Act
-        ResultActions resultActions = mockMvc.perform(get("/hookahs/find-by-id/{id}", hookahIdWeWantToGet));
+        ResultActions resultActions = mockMvc
+                .perform(get("/hookahs/find-by-id/{id}", hookahIdWeWantToGet));
 
         // Assert
         resultActions.andExpect(status().isNotFound())
@@ -124,9 +120,11 @@ class HookahControllerTest {
         HookahDTO foundHookah = new HookahDTO();
         foundHookah.setName(hookahName);
 
-        when(hookahService.getHookahByName(hookahName)).thenReturn(foundHookah);
+        when(hookahService.getHookahByName(hookahName))
+                .thenReturn(foundHookah);
         // Act
-        ResultActions resultActions = mockMvc.perform(get("/hookahs/find-by-name/{name}", hookahName));
+        ResultActions resultActions = mockMvc
+                .perform(get("/hookahs/find-by-name/{name}", hookahName));
 
         // Assert
         resultActions.andExpect(status().isOk())
@@ -143,7 +141,8 @@ class HookahControllerTest {
                 .thenThrow(new NoSuchHookahException("The hookah that you want to get is not present"));
 
         // Act
-        ResultActions resultActions = mockMvc.perform(get("/hookahs/find-by-name/{name}", invalidHookahName));
+        ResultActions resultActions = mockMvc
+                .perform(get("/hookahs/find-by-name/{name}", invalidHookahName));
 
         // Assert
         resultActions.andExpect(status().isNotFound())
@@ -154,10 +153,10 @@ class HookahControllerTest {
     @Test
     public void testCreateNewHookahShouldCreateNewHookahSuccessful() throws Exception {
         // Arrange
-        HookahDTO mockedHookahForRequest = new HookahDTO();
         HookahDTO mockedHookahForResponse = new HookahDTO();
 
-        when(hookahService.createNewHookah(any(HookahDTO.class))).thenReturn(mockedHookahForResponse);
+        when(hookahService.createNewHookah(any(HookahDTO.class)))
+                .thenReturn(mockedHookahForResponse);
         // Act
         ResultActions resultActions = mockMvc.perform(post("/hookahs")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -174,7 +173,8 @@ class HookahControllerTest {
         // Arrange
         int hookahIdWeWantToDelete = 1;
 
-        doNothing().when(hookahService).deleteById(hookahIdWeWantToDelete);
+        doNothing().when(hookahService)
+                .deleteById(hookahIdWeWantToDelete);
         // Act
         ResultActions resultActions = mockMvc
                 .perform(delete("/hookahs//delete-by-id/{id}", hookahIdWeWantToDelete));
@@ -188,7 +188,8 @@ class HookahControllerTest {
         // Arrange
         String hookahName = "Hookah";
 
-        doNothing().when(hookahService).deleteByName(hookahName);
+        doNothing().when(hookahService)
+                .deleteByName(hookahName);
         // Act
         ResultActions resultActions = mockMvc
                 .perform(delete("/hookahs/delete-by-name/{name}", hookahName));
