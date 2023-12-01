@@ -1,6 +1,7 @@
 package com.cloud.rebellion.demo.service;
 
 import com.cloud.rebellion.demo.exception.EmptyPatchMapFieldsException;
+import com.cloud.rebellion.demo.exception.InvalidObjectFieldsException;
 import com.cloud.rebellion.demo.exception.NoSuchFieldTypeException;
 import com.cloud.rebellion.demo.exception.NoSuchHookahException;
 import com.cloud.rebellion.demo.mapper.HookahMapper;

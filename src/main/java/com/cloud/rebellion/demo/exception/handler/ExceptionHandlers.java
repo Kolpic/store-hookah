@@ -24,9 +24,13 @@ public class ExceptionHandlers {
         return new ResponseEntity<>(exceededBlobLengthException.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-     @ExceptionHandler(EmptyPatchMapFieldsException.class)
+    @ExceptionHandler(EmptyPatchMapFieldsException.class)
     public ResponseEntity<String> handleEmptyPatchMapFieldsException(EmptyPatchMapFieldsException emptyPatchMapFieldsException) {
         return new ResponseEntity<>(emptyPatchMapFieldsException.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(InvalidObjectFieldsException.class)
+    public ResponseEntity<String> handleInvalidObjectFieldsException(InvalidObjectFieldsException invalidObjectFieldsException) {
+        return new ResponseEntity<>(invalidObjectFieldsException.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }
