@@ -20,6 +20,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Service layer for managing hookah-related operations.
+ * This includes the logic for operations such as retrieving, creating, updating,
+ * and deleting hookahs.
+ */
 @RequiredArgsConstructor
 @Service
 public class HookahService {
@@ -27,6 +32,11 @@ public class HookahService {
     private final HookahRepository hookahRepository;
     private final HookahMapper hookahMapper;
 
+    /**
+     * Retrieves all hookahs from the repository.
+     *
+     * @return A list of HookahDTO representing all hookahs.
+     */
     public List<HookahDTO> getAllHookahs() {
         return hookahRepository
                 .findAll()
@@ -35,6 +45,13 @@ public class HookahService {
                 .toList();
     }
 
+    /**
+     * Retrieves a hookah by its unique identifier.
+     *
+     * @param id The unique identifier of the hookah.
+     * @return HookahDTO representing the hookah with the specified id.
+     * @throws NoSuchHookahException if the hookah is not found.
+     */
     public HookahDTO getHookahById(int id) {
         return hookahRepository
                 .findById(id)
@@ -42,6 +59,13 @@ public class HookahService {
                 .orElseThrow(() -> new NoSuchHookahException("There is no such hookah"));
     }
 
+    /**
+     * Retrieves a hookah by its name.
+     *
+     * @param name The name of the hookah.
+     * @return HookahDTO representing the hookah with the specified name.
+     * @throws NoSuchHookahException if no hookah with the given name is found.
+     */
     public HookahDTO getHookahByName(String name) {
         Optional<Hookah> foundHookahByName = hookahRepository.findHookahByName(name);
         if (foundHookahByName.isPresent()) {
@@ -51,6 +75,12 @@ public class HookahService {
         }
     }
 
+    /**
+     * Creates a new hookah and saves it in the repository.
+     *
+     * @param providedHookah The DTO containing hookah details.
+     * @return HookahDTO representing the newly created hookah.
+     */
     public HookahDTO createNewHookah(HookahDTO providedHookah) {
         Hookah hookahToSave = hookahMapper.mapHookahDTOToHookah(providedHookah);
         hookahRepository.save(hookahToSave);
@@ -58,12 +88,20 @@ public class HookahService {
     }
 
     /**
+     * Updates an existing hookah identified by the given ID.
+     *
      * Update an existing resource --- entierly --- PUT
      * Update an existing resource --- partially --- PATCH
      * We are using PATCH. We are using reflection, because we don't know which
      * field or fields will be modified. With the help of map (String) key
      * is the hookah field and the map (Object) value is the value corresponding
      * to that field we want to update.
+     *
+     * @param id The unique identifier of the hookah to be updated.
+     * @param fields A map where the key is the field name and the value is the new value for that field.
+     * @return HookahDTO representing the updated hookah.
+     * @throws NoSuchHookahException if the hookah is not found.
+     * @throws EmptyPatchMapFieldsException if provided fields are empty or have wrong data types.
      */
     public HookahDTO updateExistingHookah(int id, Map<String, Object> fields) {
         Optional<Hookah> existingHookah = hookahRepository.findById(id);
@@ -86,6 +124,7 @@ public class HookahService {
         }
     }
 
+    // Helper method to convert value types
     private Object convertValue(Class<?> targetType, Object value) {
         if (targetType == String.class) {
             return value.toString();
@@ -100,10 +139,21 @@ public class HookahService {
         }
     }
 
+    /**
+     * Deletes a hookah by its unique identifier.
+     *
+     * @param id The unique identifier of the hookah to be deleted.
+     */
     public void deleteById(int id) {
         hookahRepository.deleteById(id);
     }
 
+    /**
+     * Deletes a hookah by its name.
+     *
+     * @param name The name of the hookah to be deleted.
+     * @throws NoSuchHookahException if no hookah with the given name is found.
+     */
     public void deleteByName(String name) {
         Optional<Hookah> hookahByName = hookahRepository.findHookahByName(name);
         if (hookahByName.isPresent()) {

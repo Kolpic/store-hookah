@@ -7,6 +7,11 @@ import lombok.Setter;
 
 import java.sql.Blob;
 
+/**
+ * Base class for the individual parts of the hookah. The idea is to reduce code repeat.
+ * Instead of this code to be present in every class(hookah, HMD, Accessory etc) it can be placed in
+ * one BaseEntity class and other classes to extend BaseEntity
+ */
 @Getter
 @Setter
 // https://vladmihalcea.com/how-to-inherit-properties-from-a-base-class-entity-using-mappedsuperclass-with-jpa-and-hibernate/
