@@ -256,7 +256,7 @@ class HookahControllerTest {
                         .content(objectMapper.writeValueAsString(fields)));
 
         // Assert
-        resultActions.andExpect(status().isNotFound())
+        resultActions.andExpect(status().isBadRequest())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN))
                 .andExpect(jsonPath("$").value("One of the field/fields is empty or with wrong data type"));
     }

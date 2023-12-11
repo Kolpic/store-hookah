@@ -11,6 +11,11 @@ import lombok.Setter;
 
 import java.sql.Blob;
 
+/**
+ * Data Transfer Object (DTO) for Hookah.
+ * This class represents the data structure for transferring Hookah data between processes.
+ * It contains various attributes of a Hookah, such as name, weight, brand, origin, etc.
+ */
 @Getter
 @Setter
 public class HookahDTO {
@@ -21,6 +26,10 @@ public class HookahDTO {
     private String origin;
     private String material;
     private Color color;
+    /**
+     * The binary representation of the hookah's image.
+     * This field is serialized and deserialized using custom BlobSerializer and BlobDeserializer.
+     */
     @JsonSerialize(using = BlobSerializer.class)
     @JsonDeserialize(using = BlobDeserializer.class)
     private Blob image_binary;
