@@ -1,14 +1,11 @@
 package com.cloud.rebellion.demo.service;
 
 import com.cloud.rebellion.demo.exception.EmptyPatchMapFieldsException;
-import com.cloud.rebellion.demo.exception.InvalidObjectFieldsException;
 import com.cloud.rebellion.demo.exception.NoSuchFieldTypeException;
-import com.cloud.rebellion.demo.exception.NoSuchHookahException;
+import com.cloud.rebellion.demo.exception.hookah.NoSuchHookahException;
 import com.cloud.rebellion.demo.mapper.HookahMapper;
 import com.cloud.rebellion.demo.model.dto.HookahDTO;
-import com.cloud.rebellion.demo.model.entity.BaseEntity;
 import com.cloud.rebellion.demo.model.entity.Hookah;
-import com.cloud.rebellion.demo.model.entity.Product;
 import com.cloud.rebellion.demo.repository.HookahRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +14,6 @@ import org.springframework.util.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 /**

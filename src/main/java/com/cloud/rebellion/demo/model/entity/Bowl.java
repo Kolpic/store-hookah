@@ -6,6 +6,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Entity class representing a bowl.
+ * This class extends BaseEntity to inherit common properties and adds specific properties
+ * unique to a bowl, such as bowl finish, for what type tobacco is the bowl
+ * and the capacity, the bowl can have.
+ */
 @Getter
 @Setter
 @Entity

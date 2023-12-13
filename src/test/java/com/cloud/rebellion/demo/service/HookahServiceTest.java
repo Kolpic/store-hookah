@@ -2,9 +2,7 @@ package com.cloud.rebellion.demo.service;
 
 import com.cloud.rebellion.demo.enums.Color;
 import com.cloud.rebellion.demo.exception.EmptyPatchMapFieldsException;
-import com.cloud.rebellion.demo.exception.InvalidObjectFieldsException;
-import com.cloud.rebellion.demo.exception.NoSuchFieldTypeException;
-import com.cloud.rebellion.demo.exception.NoSuchHookahException;
+import com.cloud.rebellion.demo.exception.hookah.NoSuchHookahException;
 import com.cloud.rebellion.demo.mapper.HookahMapper;
 import com.cloud.rebellion.demo.model.dto.HookahDTO;
 import com.cloud.rebellion.demo.model.entity.Hookah;
@@ -13,10 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.util.ReflectionUtils;
 
 import java.util.*;
 
@@ -61,7 +56,7 @@ class HookahServiceTest {
     }
 
     @Test
-    public void testGetAllHookahsShouldGetNullIfThereAreNoHookahs() {
+    public void testGetAllHookahsShouldReturnEmptyListIfThereAreNoHookahs() {
         // Arrange
         List<Hookah> mockHookahList = new ArrayList<>();
         when(hookahRepository.findAll()).thenReturn(mockHookahList);
@@ -227,11 +222,11 @@ class HookahServiceTest {
         fieldsWeWantToUpdate.put("color", "RED");
 
         Hookah hookahWeWantToUpdate = new Hookah();
-        hookahWeWantToUpdate.setId(1);
-        hookahWeWantToUpdate.setName("new Name");
-        hookahWeWantToUpdate.setPrice(88.00);
-        hookahWeWantToUpdate.setWeight(100);
-        hookahWeWantToUpdate.setColor(Color.RED);
+//        hookahWeWantToUpdate.setId(1);
+        hookahWeWantToUpdate.setName("old Name");
+        hookahWeWantToUpdate.setPrice(100.00);
+        hookahWeWantToUpdate.setWeight(80);
+        hookahWeWantToUpdate.setColor(Color.GREEN);
 
         HookahDTO updatedHookahDTO = new HookahDTO();
         updatedHookahDTO.setName("new Name");
@@ -277,7 +272,7 @@ class HookahServiceTest {
     }
 
     @Test
-    public void testUpdateExistingHookahShouldThrowIfFieldKeyIsNull() {
+    public void testUpdateExistingHookahShouldThrowIfFieldKeyIsEmpty() {
         // Arrange
         int hookahIdWeWantToUpdate = 1;
         Map<String, Object> fieldsWeWantToUpdate = new HashMap<>();

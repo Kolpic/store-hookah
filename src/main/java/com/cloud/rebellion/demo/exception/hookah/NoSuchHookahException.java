@@ -1,4 +1,4 @@
-package com.cloud.rebellion.demo.exception;
+package com.cloud.rebellion.demo.exception.hookah;
 
 public class NoSuchHookahException extends RuntimeException{
 
