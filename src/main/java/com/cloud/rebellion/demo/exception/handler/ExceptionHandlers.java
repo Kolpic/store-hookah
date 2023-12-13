@@ -1,6 +1,8 @@
 package com.cloud.rebellion.demo.exception.handler;
 
 import com.cloud.rebellion.demo.exception.*;
+import com.cloud.rebellion.demo.exception.bowl.NoSuchBowlException;
+import com.cloud.rebellion.demo.exception.hookah.NoSuchHookahException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -67,5 +69,10 @@ public class ExceptionHandlers {
     @ExceptionHandler(InvalidObjectFieldsException.class)
     public ResponseEntity<String> handleInvalidObjectFieldsException(InvalidObjectFieldsException invalidObjectFieldsException) {
         return new ResponseEntity<>(invalidObjectFieldsException.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoSuchBowlException.class)
+    public ResponseEntity<String> handleNoSuchBowlException(NoSuchBowlException noSuchBowlException) {
+        return new ResponseEntity<>(noSuchBowlException.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

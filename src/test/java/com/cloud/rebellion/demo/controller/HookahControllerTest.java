@@ -1,33 +1,23 @@
 package com.cloud.rebellion.demo.controller;
 
-import com.cloud.rebellion.demo.enums.Color;
 import com.cloud.rebellion.demo.exception.EmptyPatchMapFieldsException;
-import com.cloud.rebellion.demo.exception.InvalidObjectFieldsException;
-import com.cloud.rebellion.demo.exception.NoSuchHookahException;
+import com.cloud.rebellion.demo.exception.hookah.NoSuchHookahException;
 import com.cloud.rebellion.demo.mapper.HookahMapper;
 import com.cloud.rebellion.demo.model.dto.HookahDTO;
 import com.cloud.rebellion.demo.service.HookahService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.sql.Blob;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -174,10 +164,10 @@ class HookahControllerTest {
         int hookahIdWeWantToDelete = 1;
 
         doNothing().when(hookahService)
-                .deleteById(hookahIdWeWantToDelete);
+                .deleteById(hookahIdWeWantToDelete); // void method
         // Act
         ResultActions resultActions = mockMvc
-                .perform(delete("/hookahs//delete-by-id/{id}", hookahIdWeWantToDelete));
+                .perform(delete("/hookahs/delete-by-id/{id}", hookahIdWeWantToDelete));
 
         // Assert
         resultActions.andExpect(status().isNoContent());
@@ -230,7 +220,7 @@ class HookahControllerTest {
 
         // Act
         ResultActions resultActions = mockMvc
-                .perform(patch("/hookahs//{id}", hookahId)
+                .perform(patch("/hookahs/{id}", hookahId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(fields)));
 
@@ -241,11 +231,11 @@ class HookahControllerTest {
     }
 
     @Test
-    public void testUpdateHookahShouldReturnNotFoundIfTheWantedHookahHasEmptyKeyField() throws Exception {
+    public void testUpdateHookahShouldReturnBadRequestIfTheFieldGivenHasEmptyKey() throws Exception {
         // Arrange
         int hookahId = 1;
         Map<String, Object> fields = new HashMap<>();
-        fields.put("name", "New Name");
+        fields.put("", "New Name");
 
         when(hookahService.updateExistingHookah(hookahId, fields))
                 .thenThrow(new EmptyPatchMapFieldsException("One of the field/fields is empty or with wrong data type"));
@@ -273,7 +263,7 @@ class HookahControllerTest {
 
         // Act
         ResultActions resultActions = mockMvc
-                .perform(patch("/hookahs//{id}", hookahId)
+                .perform(patch("/hookahs/{id}", hookahId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(fields)));
 
